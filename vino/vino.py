@@ -69,12 +69,11 @@ def main():
                print('found winestyle with the same name')
         return redirect('/')
 
-
     @app.teardown_appcontext
     def cleanup(resp_or_exc):
         Session.remove()
 
-    app.run()
+    app.run(debug=True)
 
 
 if __name__ == '__main__':
