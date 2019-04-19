@@ -13,7 +13,7 @@ winery_style = Table('winery_styles', Base.metadata,
 class Winery(Base):
     __tablename__ = 'wineries'
     id = Column(Integer, primary_key=True)
-    name = Column(String(64), nullable=False)
+    name = Column(String(64), nullable=False, unique=True)
     latitude = Column(Float)
     longitude = Column(Float)
     created_at = Column(DateTime, server_default=func.now())
@@ -25,7 +25,7 @@ class Winery(Base):
 class WineStyle(Base):
     __tablename__ = 'styles'
     id = Column(Integer, primary_key=True)
-    name = Column(String(64), nullable=False)
+    name = Column(String(64), nullable=False, unique=True)
     description = Column(String)
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, onupdate=func.now())
@@ -36,7 +36,7 @@ class WineStyle(Base):
 class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
-    name = Column(String(64))
+    name = Column(String(64), unique=True)
     username = Column(String, nullable=False)
     email = Column(String, nullable=False)
     password = Column(String, nullable=False) # TODO make sure password is hashed
