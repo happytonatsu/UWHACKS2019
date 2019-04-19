@@ -35,15 +35,11 @@ def main():
         if request.form:
 
             name = request.form.get('name', '')
-            latitude = request.form.get('latitude', None)
-            longitude = request.form.get('longitude', None)
 
             w = Session.query(Winery).filter_by(name=name).first()
             if not w:
                 try:
-                    w = Winery(name=name,
-                               latitude=latitude,
-                               longitude=longitude)
+                    w = Winery(name=name)
                     Session.add(w)
                     Session.commit()
                 except Exception as e:
