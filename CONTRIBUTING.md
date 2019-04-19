@@ -1,4 +1,4 @@
-Install Python requirements with `pip3 install -r requirements.txt`
-Recommend using a Python virtual environments with `python3 -m virtualenv venv`
-Activate virtualenv with `source venv/bin/activate`
-To start the Flask app, navigate to the vino directory, and run `python3 vino.py`
+- Install Python requirements with `pip3 install -r requirements.txt`
+- Recommend using a Python virtual environments with `python3 -m virtualenv venv`
+- Activate virtualenv with `source venv/bin/activate`
+- To start the Flask app, navigate to the vino directory, and run `python3 vino.py`
