@@ -44,5 +44,3 @@ class User(Base):
     password = Column(String, nullable=False) # TODO make sure password is hashed
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, onupdate=func.now())
-
-
