@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
-import json
-
-from flask import Flask, jsonify, request, redirect
+from flask import Flask, request, redirect, render_template
 
 from db import Session, Base, engine
 from models import Winery, WineStyle, User
@@ -23,6 +21,14 @@ def main():
             return json_serial(w)
         else:
             return 'Nothing'
+
+
+    @app.route('/winery/<i>')
+    def winery(i):
+
+        w = Session.query(Winery).filter_by(id=i).first()
+
+        return render_template('winery.html', w=w)
 
     @app.route('/add/winery', methods=['POST'])
     def add_winery():
@@ -63,7 +69,7 @@ def main():
                 except Exception as e:
                     print('unable to add WineStyle')
                     print(e)
-           else:
+            else:
                print('found winestyle with the same name')
         return redirect('/')
 
