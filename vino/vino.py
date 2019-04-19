@@ -23,12 +23,16 @@ def main():
             return 'Nothing'
 
 
-    @app.route('/winery/<i>')
-    def winery(i):
+    @app.route('/winery')
+    @app.route('/winery/<int:_id>')
+    def winery(_id=None):
+       if _id:
+            w = Session.query(Winery).filter_by(id=_id).first()
+            return render_template('winery.html', w=w)
 
-        w = Session.query(Winery).filter_by(id=i).first()
+       else:
+           return 'show all wineries'
 
-        return render_template('winery.html', w=w)
 
     @app.route('/add/winery', methods=['POST'])
     def add_winery():
@@ -56,9 +60,23 @@ def main():
                 except Exception as e:
                     print('unable to add winery')
                     print(e)
+
+                return winery(w.id)
             else:
                 print('found winery with the same name')
         return redirect('/')
+
+
+    @app.route('/styles')
+    @app.route('/styles/<int:_id>')
+    def style(_id=None):
+        if _id:
+            s = Session.query(WineStyle).filter_by(id=_id).first()
+            return render_template('winestyle.html', s=s)
+
+        else:
+            return 'render all winestyles'
+
 
     @app.route('/add/styles', methods=['POST'])
     def add_style():
@@ -76,6 +94,8 @@ def main():
                 except Exception as e:
                     print('unable to add WineStyle')
                     print(e)
+
+                return style(s.id)
             else:
                print('found winestyle with the same name')
         return redirect('/')
