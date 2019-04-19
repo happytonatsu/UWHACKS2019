@@ -1,11 +1,15 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import func
-from sqlalchemy import Float, DateTime, Column, Integer, String, ForeignKey
+from sqlalchemy import Table, Float, DateTime, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 
 Base = declarative_base()
 
+
+winery_style = Table('winery_styles', Base.metadata,
+                     Column('winery_id', Integer, ForeignKey('wineries.id')),
+                     Column('style_id', Integer, ForeignKey('styles.id')))
 
 class Winery(Base):
     __tablename__ = 'wineries'
@@ -14,7 +18,7 @@ class Winery(Base):
     latitude = Column(Float)
     longitude = Column(Float)
     created_at = Column(DateTime, server_default=func.now())
-    updated_at = Column(DateTime, on_updated=func.now())
+    updated_at = Column(DateTime, onupdate=func.now())
 
     styles = relationship('WineStyle', secondary=winery_style)
 
@@ -25,7 +29,7 @@ class WineStyle(Base):
     name = Column(String(64), nullable=False)
     description = Column(String)
     created_at = Column(DateTime, server_default=func.now())
-    updated_at = Column(DateTime, on_updated=func.now())
+    updated_at = Column(DateTime, onupdate=func.now())
 
     wineries = relationship('Winery', secondary=winery_style)
 
@@ -38,9 +42,6 @@ class User(Base):
     email = Column(String, nullable=False)
     password = Column(String, nullable=False) # TODO make sure password is hashed
     created_at = Column(DateTime, server_default=func.now())
-    updated_at = Column(DateTime, on_updated=func.now())
+    updated_at = Column(DateTime, onupdate=func.now())
 
 
-winery_style = Table('winery_styles', Base.metadata,
-                     Column('winery_id'), Integer, ForeignKey('wineries.id'),
-                     Column('style_id'), Integer, ForeignKey('styles.id'))
