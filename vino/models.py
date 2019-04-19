@@ -14,8 +14,10 @@ class Winery(Base):
     __tablename__ = 'wineries'
     id = Column(Integer, primary_key=True)
     name = Column(String(64), nullable=False, unique=True)
-    latitude = Column(Float)
-    longitude = Column(Float)
+    address = Column(String)
+    phone = Column(String)
+    url = Column(String)
+    description = Column(String)
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, onupdate=func.now())
 
