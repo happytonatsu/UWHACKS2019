@@ -19,11 +19,10 @@ def main():
 
     @app.route('/static/<path:path>')
     def send_static(path):
-    return send_from_directory('static', path)
+        return send_from_directory('static', path)
 
-    
-    @app.route('/static/images')
-    def send_js(path):
+#    @app.route('/static/images')
+ #   def send_js(path):
 
 
     @app.route('/winery')
