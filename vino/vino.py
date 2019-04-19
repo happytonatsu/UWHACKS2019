@@ -38,8 +38,19 @@ def main():
 
             w = Session.query(Winery).filter_by(name=name).first()
             if not w:
+
+                address = request.form.get('address', '')
+                phone = request.form.get('phone', '')
+                url = request.form.get('url', '')
+                desc= request.form.get('description', '')
+
                 try:
-                    w = Winery(name=name)
+                    w = Winery(name=name,
+                               address=address,
+                               phone=phone,
+                               url=url,
+                               description=desc)
+
                     Session.add(w)
                     Session.commit()
                 except Exception as e:
@@ -54,11 +65,11 @@ def main():
         if request.form:
 
             name = request.form.get('name', '')
-            desc = request.form.get('description', '')
 
             s = Session.query(WineStyle).filter_by(name=name).first()
             if not s:
                 try:
+                    desc = request.form.get('description', '')
                     s = WineStyle(name=name, description=desc)
                     Session.add(s)
                     Session.commit()
