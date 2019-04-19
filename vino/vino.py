@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, send_from_directory
 
 from db import Session, Base, engine
 from models import Winery, WineStyle, User
@@ -15,12 +15,7 @@ def main():
 
     @app.route('/')
     def index():
-        w = Session.query(Winery).first()
-        if w:
-
-            return json_serial(w)
-        else:
-            return 'Nothing'
+        return render_template('index.html')
 
 
     @app.route('/winery')
