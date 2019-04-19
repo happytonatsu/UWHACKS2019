@@ -1,17 +1,15 @@
 #!/usr/bin/env python
 
 from flask import Flask
-from sqlalchemy_utils import database_exists, create_database
-from db import Session, engine
+from db import Session, Base, engine
 from models import Winery
 
 
 def main():
 
-    app = Flask(__name__)
+    Base.metadata.create_all(engine, checkfirst=True)
 
-    if not database_exists(engine.url):
-        create_database(engine.url)
+    app = Flask(__name__)
 
     @app.route('/')
     def index():

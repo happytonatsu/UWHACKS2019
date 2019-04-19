@@ -1,10 +1,9 @@
-from sqlalchemy.ext.declarative import declarative_base
+
 from sqlalchemy.sql import func
 from sqlalchemy import Table, Float, DateTime, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
-
-Base = declarative_base()
+from db import Base
 
 
 winery_style = Table('winery_styles', Base.metadata,
