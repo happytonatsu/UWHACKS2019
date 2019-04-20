@@ -17,6 +17,15 @@ def main():
     def index():
         return render_template('index.html')
 
+
+    @app.route('/static/<path:path>')
+    def send_static(path):
+        return send_from_directory('static', path)
+
+#    @app.route('/static/images')
+ #   def send_js(path):
+ 
+
     @app.route('/search')
     def search():
         q = request.args.get('q', None)
