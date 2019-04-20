@@ -1,1 +1,19 @@
-placeholder
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{s.name}}</title>
+  </head>
+  <body>
+    <div>
+      <h5>What is {{s.name}}?</h5>
+      <p>{{s.description}}</p>
+    </div>
+    <div>
+      <h5>available at these locations:</h5>
+      {% for w in s.wineries %}
+        <li>{{w.name}}: | {{w.address}} | {{w.phone}} | <a href="{{w.url}}">website</a></li>
+      {% endfor %}
+    </div>
+  </body>
+</html>
