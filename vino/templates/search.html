@@ -1,11 +1,12 @@
-<table>
-<thead>
-<th><tr>Wineries</tr></th>
-</thead>
-<tbody>
+{% extends "layout.html" %}
+{% block content %}
+<p class="h1">Wine Styles</p>
+
+<ul>
 {% for w in ws %}
-    <tr><th>
-    <a href="/winery/{{ w.id }}">{{ w.name }}</a>
-    </th></tr>
+    <li>
+    <a href="/styles/{{ w.id }}">{{ w.name }}</a>
+    </li>
 {% endfor %}
-</tbody>
+</ul>
+{% endblock %}
