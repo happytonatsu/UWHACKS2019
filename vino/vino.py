@@ -24,7 +24,7 @@ def main():
 
 #    @app.route('/static/images')
  #   def send_js(path):
- 
+
 
     @app.route('/search')
     def search():
@@ -47,37 +47,40 @@ def main():
            return 'show all wineries'
 
 
-    @app.route('/add/winery', methods=['POST'])
+    @app.route('/add/winery', methods=['GET', 'POST'])
     def add_winery():
-        if request.form:
+        if request.method == 'POST':
+            if request.form:
 
-            name = request.form.get('name', '')
+                name = request.form.get('name', '')
 
-            w = Session.query(Winery).filter_by(name=name).first()
-            if not w:
+                w = Session.query(Winery).filter_by(name=name).first()
+                if not w:
 
-                address = request.form.get('address', '')
-                phone = request.form.get('phone', '')
-                url = request.form.get('url', '')
-                desc= request.form.get('description', '')
+                    address = request.form.get('address', '')
+                    phone = request.form.get('phone', '')
+                    url = request.form.get('url', '')
+                    desc= request.form.get('description', '')
 
-                try:
-                    w = Winery(name=name,
-                               address=address,
-                               phone=phone,
-                               url=url,
-                               description=desc)
+                    try:
+                        w = Winery(name=name,
+                                   address=address,
+                                   phone=phone,
+                                   url=url,
+                                   description=desc)
 
-                    Session.add(w)
-                    Session.commit()
-                except Exception as e:
-                    print('unable to add winery')
-                    print(e)
+                        Session.add(w)
+                        Session.commit()
+                    except Exception as e:
+                        print('unable to add winery')
+                        print(e)
 
-                return winery(w.id)
-            else:
-                print('found winery with the same name')
-        return redirect('/')
+                    return winery(w.id)
+                else:
+                    print('found winery with the same name')
+            return redirect('/')
+        else:
+            return render_template('wineryformpage.html')
 
 
     @app.route('/styles')
