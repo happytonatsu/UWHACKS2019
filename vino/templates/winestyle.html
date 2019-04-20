@@ -12,7 +12,10 @@
     <div>
       <h5>available at these locations:</h5>
       {% for w in s.wineries %}
-        <li>{{w.name}}: | {{w.address}} | {{w.phone}} | <a href="{{w.url}}">website</a></li>
+        <li><a href="/winery/{{w.id}}">{{w.name}}</a>: | 
+          {{w.address}} |
+          {{w.phone}} |
+          <a href="{{w.url}}">website</a></li>
       {% endfor %}
     </div>
   </body>
