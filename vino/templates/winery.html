@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="container">
 <h1>{{ w.name }}</h1>
 <div>
-  address: {{w.adress}} |
+  address: {{w.address}} |
   phone: {{w.phone}} |
   website: {{w.url}}
 </div>
@@ -20,4 +21,5 @@
   <button type="button" name="button" methods="POST"> add to favorites </button>
 </div>
 -->
+</div>
 {% endblock %}

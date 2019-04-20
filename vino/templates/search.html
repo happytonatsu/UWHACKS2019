@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-  <h1 style="font-size:600%; color:white;">Wine Search</h1>
+  <h1 style="font-size:600%; text-align: center; color:white;">Find your style...</h1>
   <div class = "search_loc">
 <div class="container h-100">
   <div class="d-flex justify-content-center h-100">
@@ -8,16 +8,15 @@
       <form action="/search" method="GET" >
       <input class="search_input" id="q" type="text" name="q" placeholder="Search...">
       <button class="search_icon"><i class="fas fa-search"></i></button>
-    </div>
-</div>
-</div>
-</div>
-
 <ul>
 {% for w in ws %}
     <li>
-    <a href="/winery/{{ w.id }}">{{ w.name }}</a>
+    <h3><a href="/winery/{{ w.id }}">{{ w.name }}</a></h3>
     </li>
 {% endfor %}
 </ul>
+
+</div>
+
+
 {% endblock %}
