@@ -17,6 +17,15 @@ def main():
     def index():
         return render_template('index.html')
 
+    @app.route('/search')
+    def search():
+        q = request.args.get('q', None)
+        ws = []
+        if q:
+            ws = Session.query(Winery).filter(Winery.name.contains(q)).all()
+
+        return render_template('search.html', ws=ws)
+
 
     @app.route('/winery')
     @app.route('/winery/<int:_id>')
