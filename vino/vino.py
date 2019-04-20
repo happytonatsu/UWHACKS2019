@@ -27,10 +27,15 @@ def main():
     def search():
         q = request.args.get('q', None)
         ws = []
+        wineries = []
         if q:
-            ws = Session.query(Winery).filter(Winery.name.contains(q)).all()
+            ws = Session.query(WineStyle).filter(WineStyle.name.contains(q)).all()
+            for w in ws:
+                wineries.extend(w.wineries)
+            from pprint import pprint
+            pprint(wineries)
 
-        return render_template('search.html', ws=ws)
+        return render_template('search.html', ws=wineries)
 
 
     @app.route('/winery')
@@ -99,19 +104,24 @@ def main():
 
             s = Session.query(WineStyle).filter_by(name=name).first()
             if not s:
-                try:
-                    desc = request.form.get('description', '')
-                    s = WineStyle(name=name, description=desc)
-                    Session.add(s)
-                    Session.commit()
-                except Exception as e:
-                    print('unable to add WineStyle')
-                    print(e)
+                desc = request.form.get('description', '')
+                s = WineStyle(name=name, description=desc)
+                Session.add(s)
 
-                return style(s.id)
-            else:
-               print('found winestyle with the same name')
-        return redirect('/')
+            wineries_id = request.form.get('wineries', '').split(',')
+            s.wineries = []
+            for _id in wineries_id:
+                w = Session.query(Winery).filter_by(id=_id.strip()).first()
+                if w:
+                    s.wineries.append(w)
+
+        try:
+            Session.commit()
+        except Exception as e:
+            print('unable to add WineStyle')
+            print(e)
+
+        return style(s.id)
 
     @app.teardown_appcontext
     def cleanup(resp_or_exc):
