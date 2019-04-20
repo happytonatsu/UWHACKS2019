@@ -1,28 +1,23 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>{{ w.name }}</title>
-  </head>
-  <h1>{{ w.name }}</h1>
-  <body>
-    <div>
-      address: {{w.adress}} |
-      phone: {{w.phone}} |
-      website: {{w.url}}
-    </div>
-    <div>
-      <h5>about {{w.name}}</h5>
-      <p>{{w.description}}</p>
-    </div>
-    <div>
-      wine types:
-      {% for s in w.styles %}
-        <li>{{ s.name }}, {{s.description }}</li>
-      {% endfor %}
-    </div>
-    <div>
-      <button type="button" name="button" methods="POST"> add to favorites </button>
-    </div>
-  </body>
-</html>
+{% extends "layout.html" %}
+{% block content %}
+<h1>{{ w.name }}</h1>
+<div>
+  address: {{w.adress}} |
+  phone: {{w.phone}} |
+  website: {{w.url}}
+</div>
+<div>
+  <h5>about {{w.name}}</h5>
+  <p>{{w.description}}</p>
+</div>
+<div>
+  wine types:
+  {% for s in w.styles %}
+    <li>{{ s.name }}, {{s.description }}</li>
+  {% endfor %}
+</div>
+<!-- <div>
+  <button type="button" name="button" methods="POST"> add to favorites </button>
+</div>
+-->
+{% endblock %}

@@ -22,9 +22,6 @@ def main():
     def send_static(path):
         return send_from_directory('static', path)
 
-#    @app.route('/static/images')
- #   def send_js(path):
-
 
     @app.route('/search')
     def search():
