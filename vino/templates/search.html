@@ -1,0 +1,11 @@
+<table>
+<thead>
+<th><tr>Wineries</tr></th>
+</thead>
+<tbody>
+{% for w in ws %}
+    <tr><th>
+    <a href="/winery/{{ w.id }}">{{ w.name }}</a>
+    </th></tr>
+{% endfor %}
+</tbody>
