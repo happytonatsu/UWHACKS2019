@@ -27,10 +27,15 @@ def main():
     def search():
         q = request.args.get('q', None)
         ws = []
+        wineries = []
         if q:
             ws = Session.query(WineStyle).filter(WineStyle.name.contains(q)).all()
+            for w in ws:
+                wineries.extend(w.wineries)
+            from pprint import pprint
+            pprint(wineries)
 
-        return render_template('search.html', ws=ws)
+        return render_template('search.html', ws=wineries)
 
 
     @app.route('/winery')

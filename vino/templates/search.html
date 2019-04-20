@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-<p class="h1">Wine Styles</p>
+<p class="h1">Search</p>
 
 <ul>
 {% for w in ws %}
     <li>
-    <a href="/styles/{{ w.id }}">{{ w.name }}</a>
+    <a href="/winery/{{ w.id }}">{{ w.name }}</a>
     </li>
 {% endfor %}
 </ul>
